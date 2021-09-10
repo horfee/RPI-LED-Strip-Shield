@@ -1,0 +1,89 @@
+<h4>RPI LED Strip Shield Configuration</h4>
+
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">Address of controller</label>
+        <div class="controls">
+            <select data-bind="options: addresses, value: settings.settings.plugins.rpi_ledstrip_shield.pcaAddress">
+                <option data-bind="value: $data, text: $data"></option>
+            </select>
+            <button data-bind="click: refreshAddresses" type="button">refresh</button>
+            <p>Here we need to enable I2C on the raspberry and download i2c-tools via the command <code>sudo apt install i2c-tools</code>. Once done, you will be able to get list of detected addresses</p>
+        </div>
+        
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Red Pin Number</label>
+        <div class="controls">
+            <input type="number" step="any" min="4" max="7" class="input-mini text-right" data-bind="value: settings.settings.plugins.rpi_ledstrip_shield.redPin">
+            <input type="checkbox" style="margin-top: 0px; margin-right: 2px" data-bind="checked: settings.settings.plugins.rpi_ledstrip_shield.redPinEnabled">Enabled
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Green Pin Number</label>
+        <div class="controls">
+            <input type="number" step="any" min="4" max="7" class="input-mini text-right" data-bind="value: settings.settings.plugins.rpi_ledstrip_shield.greenPin">
+            <input type="checkbox" style="margin-top: 0px; margin-right: 2px" data-bind="checked: settings.settings.plugins.rpi_ledstrip_shield.greenPinEnabled">Enabled
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Blue Pin Number</label>
+        <div class="controls">
+            <input type="number" step="any" min="4" max="7" class="input-mini text-right" data-bind="value: settings.settings.plugins.rpi_ledstrip_shield.bluePin">
+            <input type="checkbox" style="margin-top: 0px; margin-right: 2px" data-bind="checked: settings.settings.plugins.rpi_ledstrip_shield.bluePinEnabled">Enabled
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">White Pin Number (Optional)</label>
+        <div class="controls">
+            <input type="number" step="any" min="4" max="7" class="input-mini text-right" data-bind="value: settings.settings.plugins.rpi_ledstrip_shield.whitePin">
+            <input type="checkbox" style="margin-top: 0px; margin-right: 2px" data-bind="checked: settings.settings.plugins.rpi_ledstrip_shield.whitePinEnabled">Enabled
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.settings.plugins.rpi_ledstrip_shield.controlFan">Control fan with the shield capability
+            </label>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Command to read SoC temperature</label>
+        <div class="controls">
+            <input type="string" class="input-long text-left" style="width:calc(100% - 8px)" data-bind="value: settings.settings.plugins.rpi_ledstrip_shield.measureTempcmd">
+            <p>This command shall return a float value only. <br/>Be sure to get values like XX.XXX without any other characters, or monitoring will fail and the fan won't be controlled.</p>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">lower temperature</label>
+        <div class="controls">
+            <input type="number" step="any" min="0" max="100" class="input-mini text-right" data-bind="value: settings.settings.plugins.rpi_ledstrip_shield.minTemperature">
+            <p>This is the lowest temperature where the fan start to spin.  Temperature below this threshold will stop the fan to spin.</p>
+        </div>
+        
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">highest temperature</label>
+        <div class="controls">
+            <input type="number" step="any" min="0" max="100" class="input-mini text-right" data-bind="value: settings.settings.plugins.rpi_ledstrip_shield.maxTemperature">
+            <p>This is the highest temperature where the fan will spin at 100%.</p>
+        </div>
+        
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" data-bind="checked: settings.settings.plugins.rpi_ledstrip_shield.catchM150">Intercept M150 commands in gcode
+            </label>
+        </div>
+    </div>
+</form>
