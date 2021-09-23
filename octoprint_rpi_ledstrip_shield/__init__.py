@@ -94,19 +94,19 @@ class Shield:
         # here 700 is the lowest PWM for the fan to run.
         if temp < self.minTemperature:
             self._logger.debug("Turning off the fan")
-            #self.pca.set_pwm(8, 0, 0)
+            self.pca.set_pwm(8, 0, 0)
         else:
             temp = min(temp, self.maxTemperature)
             pct = interpolate(temp, self.minTemperature, self.maxTemperature, 700, 4095)
-            self._logger.debug("Setting fan to run at %f\% of max speed", pct)
-            #self.pca.set_pwm(8, 0, pct)
+            self._logger.debug("Setting fan to run at %f\% of max speed", 100 * pct / 4095)
+            self.pca.set_pwm(8, 0, int(pct))
 
 
 
 
 def detectI2CDevices():
-    #cmd = "i2cdetect -y 1"
-    cmd = "cat ic2detectOutput"
+    cmd = "i2cdetect -y 1"
+    #cmd = "cat ic2detectOutput"
     stdout = subprocess.Popen(cmd,stdout=PIPE, shell=True).stdout
     foundDevices = []
     firstLine = True
